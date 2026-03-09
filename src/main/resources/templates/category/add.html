@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: layout(~{:: #main-content})}">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Category</title>
+</head>
+<body>
+<div id="main-content">
+  <div class="row">
+    <div class="col-lg-6 mx-auto">
+      <h2><i class="fas fa-plus-circle"></i> Add New Category</h2>
+      <p class="text-muted mb-4">Create a new product category for your inventory</p>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <form th:action="@{/categories/save}" th:object="${category}" method="post" class="form">
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                <i class="fas fa-tag"></i> Category Name
+              </label>
+              <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Enter category name (e.g., Electronics, Clothing)" required>
+              <small class="text-muted">
+                <i class="fas fa-info-circle"></i> Enter a unique category name
+              </small>
+              <div th:if="${#fields.hasErrors('name')}" class="text-danger">
+                <small><i class="fas fa-exclamation-circle"></i> <span th:errors="*{name}"></span></small>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 mt-4">
+              <button type="submit" class="btn btn-success px-4">
+                <i class="fas fa-save"></i> Create Category
+              </button>
+              <a href="/categories" class="btn btn-secondary px-4">
+                <i class="fas fa-arrow-left"></i> Back
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Info Box -->
+      <div class="alert alert-info mt-4" role="alert">
+        <i class="fas fa-info-circle"></i>
+        <strong>Important:</strong> Once a category has products, it cannot be edited or deleted. 
+        Please ensure the category name is correct before saving.
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
